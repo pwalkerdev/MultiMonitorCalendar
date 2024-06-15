@@ -21,8 +21,8 @@ public partial class TaskbarClockOverlay : Form
     private void Form1_Load(object sender, EventArgs e)
     {
         var taskbarLocation = TaskbarLocation;
-        Location = new Point(taskbarLocation.Right - 148, taskbarLocation.Top);
-        Size = new Size(148, taskbarLocation.Bottom - taskbarLocation.Top);
+        Location = new Point(taskbarLocation.Right - 142, taskbarLocation.Top);
+        Size = new Size(142, taskbarLocation.Bottom - taskbarLocation.Top);
 
         SetWindowPos(Handle, -1, 0, 0, 0, 0, 0x0001 /* SWP_NOSIZE */ | 0x0002 /* SWP_NOMOVE */ | 0x0010 /* SWP_NOACTIVATE */);
         SetWindowLong(Handle, -20, GetWindowLong(Handle, -20) | 0x80 /* WS_EX_TOOLWINDOW */);
