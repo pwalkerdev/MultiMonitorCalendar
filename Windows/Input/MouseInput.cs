@@ -1,4 +1,5 @@
-﻿namespace MultiMonitorCalendar.Windows.Input;
+﻿// ReSharper disable InconsistentNaming
+namespace MultiMonitorCalendar.Windows.Input;
 
 [StructLayout(LayoutKind.Sequential)]
 internal struct MouseInput
