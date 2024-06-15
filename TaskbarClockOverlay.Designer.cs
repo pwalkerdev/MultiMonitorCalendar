@@ -1,6 +1,6 @@
 ﻿namespace MultiMonitorCalendar
 {
-    partial class Form1
+    partial class TaskbarClockOverlay
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,13 +30,13 @@
         {
             SuspendLayout();
             // 
-            // Form1
+            // TaskbarClockOverlay
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Form1";
+            Name = "TaskbarClockOverlay";
             Opacity = 0.01D;
             ShowInTaskbar = false;
             Load += Form1_Load;

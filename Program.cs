@@ -12,7 +12,7 @@ internal static class Program
     {
         ApplicationConfiguration.Initialize();
 
-        if (Screen.AllScreens.OrderByDescending(s => s.Primary).Select(s => new Form1(s)).ToArray() is not { Length: > 0 } forms)
+        if (Screen.AllScreens.OrderByDescending(s => s.Primary).Select(s => new TaskbarClockOverlay(s)).ToArray() is not { Length: > 0 } forms)
             return;
 
         foreach (var form in forms)

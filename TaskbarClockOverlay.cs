@@ -1,6 +1,6 @@
 namespace MultiMonitorCalendar;
 
-public partial class Form1 : Form
+public partial class TaskbarClockOverlay : Form
 {
     private static readonly string _notificationCenterText = "Notification Center";
 
@@ -10,10 +10,10 @@ public partial class Form1 : Form
 
 #pragma warning disable CS8618
     // ReSharper disable once MemberCanBePrivate.Global
-    public Form1() => InitializeComponent();
+    public TaskbarClockOverlay() => InitializeComponent();
 #pragma warning restore CS8618
 
-    public Form1(Screen screen) : this()
+    public TaskbarClockOverlay(Screen screen) : this()
     {
         Screen = screen;
     }
