@@ -5,8 +5,8 @@ public partial class TaskbarClockOverlay : Form
     private static readonly string _notificationCenterText = "Notification Center";
 
     private Screen Screen { get; }
-    private nint TaskBarHandle => GetWindowFromPoint(new Point(Screen.Bounds.Right - 1, Screen.Bounds.Bottom - 1)); // TODO: Support taskbar locations other than fixed screen bottom
-    private Rect TaskBarLocation => TaskBarHandle is not 0 && GetWindowRect(TaskBarHandle, out var location) ? location : throw new Exception("Unable to locate taskbar");
+    private nint TaskbarHandle => GetWindowFromPoint(new Point(Screen.Bounds.Right - 1, Screen.Bounds.Bottom - 1)); // TODO: Support taskbar locations other than fixed screen bottom
+    private Rect TaskbarLocation => TaskbarHandle is not 0 && GetWindowRect(TaskbarHandle, out var location) ? location : throw new Exception("Unable to locate taskbar");
 
 #pragma warning disable CS8618
     // ReSharper disable once MemberCanBePrivate.Global
@@ -20,9 +20,9 @@ public partial class TaskbarClockOverlay : Form
 
     private void Form1_Load(object sender, EventArgs e)
     {
-        var taskBarLocation = TaskBarLocation;
-        Location = new Point(taskBarLocation.Right - 148, taskBarLocation.Top);
-        Size = new Size(148, taskBarLocation.Bottom - taskBarLocation.Top);
+        var taskbarLocation = TaskbarLocation;
+        Location = new Point(taskbarLocation.Right - 148, taskbarLocation.Top);
+        Size = new Size(148, taskbarLocation.Bottom - taskbarLocation.Top);
 
         SetWindowPos(Handle, -1, 0, 0, 0, 0, 0x0001 /* SWP_NOSIZE */ | 0x0002 /* SWP_NOMOVE */ | 0x0010 /* SWP_NOACTIVATE */);
         SetWindowLong(Handle, -20, GetWindowLong(Handle, -20) | 0x80 /* WS_EX_TOOLWINDOW */);
@@ -86,8 +86,8 @@ public partial class TaskbarClockOverlay : Form
         if ((FindWindow(null, _notificationCenterText) is var calendarHandle && calendarHandle == nint.Zero) || !GetWindowRect(calendarHandle, out var location))
             return;
 
-        var taskBarLocation = TaskBarLocation;
-        SetWindowPos(calendarHandle, -1, taskBarLocation.Right - (location.Right - location.Left), taskBarLocation.Top + (location.Top - location.Bottom), 0, 0, 0x0001 | 0x0004 | 0x0040 | 0x0010);
+        var taskbarLocation = TaskbarLocation;
+        SetWindowPos(calendarHandle, -1, taskbarLocation.Right - (location.Right - location.Left), taskbarLocation.Top + (location.Top - location.Bottom), 0, 0, 0x0001 | 0x0004 | 0x0040 | 0x0010);
     }
 
     [StructLayout(LayoutKind.Sequential)]
