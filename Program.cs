@@ -1,4 +1,8 @@
+global using MultiMonitorCalendar.Windows;
+global using MultiMonitorCalendar.Windows.Input;
 global using System.Runtime.InteropServices;
+global using static MultiMonitorCalendar.Windows.User32.User32;
+global using static MultiMonitorCalendar.Windows.Input.Input;
 
 namespace MultiMonitorCalendar;
 

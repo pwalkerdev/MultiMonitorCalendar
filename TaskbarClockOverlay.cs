@@ -35,47 +35,47 @@ public partial class TaskbarClockOverlay : Form
             new()
             {
                 type = 1,
-                U = new Input.InputUnion
+                U = new InputWrapper.Input
                 {
-                    ki = new Input.KEYBDINPUT
+                    ki = new KeyboardInput
                     {
-                        wVk = Input.VirtualKeyShort.LWIN
+                        wVk = VirtualKeyShort.LWIN
                     }
                 }
             },
             new()
             {
                 type = 1,
-                U = new Input.InputUnion
+                U = new InputWrapper.Input
                 {
-                    ki = new Input.KEYBDINPUT
+                    ki = new KeyboardInput
                     {
-                        wScan = Input.ScanCodeShort.KEY_N,
-                        dwFlags = Input.KEYEVENTF.SCANCODE
+                        wScan = ScanCodeShort.KEY_N,
+                        dwFlags = KeyEventFlags.SCANCODE
                     }
                 }
             },
             new()
             {
                 type = 1,
-                U = new Input.InputUnion
+                U = new InputWrapper.Input
                 {
-                    ki = new Input.KEYBDINPUT
+                    ki = new KeyboardInput
                     {
-                        wVk = Input.VirtualKeyShort.LWIN,
-                        dwFlags = Input.KEYEVENTF.KEYUP
+                        wVk = VirtualKeyShort.LWIN,
+                        dwFlags = KeyEventFlags.KEYUP
                     }
                 }
             },
             new()
             {
                 type = 1,
-                U = new Input.InputUnion
+                U = new InputWrapper.Input
                 {
-                    ki = new Input.KEYBDINPUT
+                    ki = new KeyboardInput
                     {
-                        wScan = Input.ScanCodeShort.KEY_N,
-                        dwFlags = Input.KEYEVENTF.SCANCODE | Input.KEYEVENTF.KEYUP
+                        wScan = ScanCodeShort.KEY_N,
+                        dwFlags = KeyEventFlags.SCANCODE | KeyEventFlags.KEYUP
                     }
                 }
             });
@@ -89,35 +89,4 @@ public partial class TaskbarClockOverlay : Form
         var taskbarLocation = TaskbarLocation;
         SetWindowPos(calendarHandle, -1, taskbarLocation.Right - (location.Right - location.Left), taskbarLocation.Top + (location.Top - location.Bottom), 0, 0, 0x0001 | 0x0004 | 0x0040 | 0x0010);
     }
-
-    [StructLayout(LayoutKind.Sequential)]
-    private struct Rect
-    {
-        public int Left;
-        public int Top;
-        public int Right;
-        public int Bottom;
-    }
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-    private static extern IntPtr FindWindow(string? lpClassName, string lpWindowName);
-
-    [DllImport("user32.dll")]
-    private static extern IntPtr GetForegroundWindow();
-    [DllImport("user32.dll", SetLastError = true)]
-    private static extern bool GetWindowRect(IntPtr hWnd, out Rect lpRect);
-    [DllImport("user32.dll", EntryPoint = "WindowFromPoint")]
-    private static extern IntPtr GetWindowFromPoint(Point pt);
-    [DllImport("user32.dll", SetLastError = true)]
-    private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-
-    [DllImport("user32.dll")]
-    private static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int cx, int cy, int wFlags);
-    [DllImport("user32.dll")]
-    private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    private static extern IntPtr SendMessage(IntPtr hWnd, UInt32 msg, IntPtr wParam, IntPtr lParam);
-    [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-    public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
 }
